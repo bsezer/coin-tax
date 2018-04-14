@@ -1,27 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AppComponent } from './app.component';
-import { SalesTableComponent } from './sales-table/sales-table.component';
+import { TradeTableEditorComponent } from './tables/trade-table-editor';
 import { AppRoutingModule } from './/app-routing.module';
-import { AdvancedExamplesTypesComponent } from './tables/advance-example-types';
 import { AlertModule } from 'ngx-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { TradeService } from './services/trade-service';
+import { TaxReportComponent } from './tax-reports/tax-report';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SalesTableComponent,
-    AdvancedExamplesTypesComponent
+    TradeTableEditorComponent,
+    TaxReportComponent
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
-    NgxDatatableModule,
     AppRoutingModule,
     Ng2SmartTableModule
   ],
-  providers: [],
+  providers: [
+    TradeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

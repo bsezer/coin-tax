@@ -1,12 +1,12 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SalesTableComponent } from './sales-table/sales-table.component';
-import { AdvancedExamplesTypesComponent } from './tables/advance-example-types';
+import { TradeTableEditorComponent } from './tables/trade-table-editor';
+import { TaxReportComponent } from './tax-reports/tax-report';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/editor', pathMatch: 'full' },
-  { path: 'sales', component: SalesTableComponent },
-  { path: 'editor', component: AdvancedExamplesTypesComponent }
+  { path: '', redirectTo: '/trades', pathMatch: 'full' },
+  { path: 'trades', component: TradeTableEditorComponent },
+  { path: 'taxReport', component: TaxReportComponent }
 ];
 
 @NgModule({

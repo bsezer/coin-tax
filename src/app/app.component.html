@@ -1,7 +1,17 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Coin Tax</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/trades">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/trades">Trades</a>
+        <a class="nav-item nav-link" href="/taxReport">Tax Report</a>
+        <a class="nav-item nav-link disabled" href="/importTrades">Import Trades</a>
+      </div>
+    </div>
+  </nav>
 
 <router-outlet></router-outlet>
