@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import 'ng2-smart-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { TradeService } from '../services/trade-service';
+import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
 
 @Component({
   selector: 'trade-table-editor',
   providers: [TradeService],
   template: `
-    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="userRowSelect($event)"></ng2-smart-table>
   `,
 })
 export class TradeTableEditorComponent {
@@ -15,6 +16,7 @@ export class TradeTableEditorComponent {
   source: LocalDataSource;
   
   settings = {
+    selectMode: 'multi',
     columns: {
       id: {
         title: 'ID',
@@ -89,5 +91,10 @@ export class TradeTableEditorComponent {
     this.service.getData().then((data) => {
       this.source.load(data);
     });
+  }
+
+  userRowSelect(data: Object, source: DataSource) {
+    console.log('Selection row');
+    console.log('Selected rows: ' + data);
   }
 }
