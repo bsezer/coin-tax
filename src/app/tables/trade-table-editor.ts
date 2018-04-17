@@ -8,7 +8,15 @@ import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
   selector: 'trade-table-editor',
   providers: [TradeService],
   template: `
-    <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="userRowSelect($event)"></ng2-smart-table>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Recent Trades</h5>
+      <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="userRowSelect($event)"></ng2-smart-table>
+    </div>
+    <div class="card-footer text-muted">
+      Last save was 2 mins ago.
+    </div>
+  </div>
   `,
 })
 export class TradeTableEditorComponent {
@@ -16,25 +24,11 @@ export class TradeTableEditorComponent {
   source: LocalDataSource;
   
   settings = {
-    selectMode: 'multi',
+    pager: {
+      display: true,
+      perPage: 12
+    },
     columns: {
-      id: {
-        title: 'ID',
-      },
-      name: {
-        title: 'Full Name',
-        editor: {
-          type: 'completer',
-          config: {
-            completer: {
-              data: this.source,
-              searchFields: 'name',
-              titleField: 'name',
-              descriptionField: 'email',
-            },
-          },
-        },
-      },
       tradeType: {
         title: 'Trade Type',
         type: 'html',
@@ -58,6 +52,7 @@ export class TradeTableEditorComponent {
         type: 'string',
       },
       buyCurrency: {
+        width: '3%',
         title: 'Currency',
         type: 'string',       
       },
@@ -66,23 +61,20 @@ export class TradeTableEditorComponent {
         type: 'string',
       },
       sellCurrency: {
+        width: '3%',
         title: 'Currency',
         type: 'string',
       },
       tradingFeeAmount: {
-        title: 'Trading Fee Amount',
+        title: 'Trading Fee',
         type: 'string',
       },
       tradingFeeCurrency: {
+        width: '3%',
         title: 'Currency',
         type: 'string',
       },
-      other: {
-        title: 'Comments',
-        editor: {
-          type: 'textarea',
-        },
-      },
+
     },
   };
 
