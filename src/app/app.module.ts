@@ -7,12 +7,14 @@ import { AlertModule } from 'ngx-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { TradeService } from './services/trade-service';
 import { TaxReportComponent } from './tax-reports/tax-report';
+import { ButtonViewComponent } from './tables/button-view-component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TradeTableEditorComponent,
-    TaxReportComponent
+    TaxReportComponent,
+    ButtonViewComponent
   ],
   imports: [
     AlertModule.forRoot(),

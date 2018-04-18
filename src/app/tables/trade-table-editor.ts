@@ -1,22 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import 'ng2-smart-table';
-import { LocalDataSource } from 'ng2-smart-table';
+import { LocalDataSource, ViewCell  } from 'ng2-smart-table';
 import { TradeService } from '../services/trade-service';
+import { ButtonViewComponent } from './button-view-component';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
 
 @Component({
   selector: 'trade-table-editor',
   providers: [TradeService],
+  entryComponents: [ButtonViewComponent],
   template: `
-  <div class="card text-center">
-    <div class="card-body">
-      <h5 class="card-title">Recent Trades</h5>
-      <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="userRowSelect($event)"></ng2-smart-table>
+  <div class="row align-items-center">
+    <div class="col-3">
+      <h4>Import Trades</h4>
     </div>
-    <div class="card-footer text-muted">
-      Last save was 2 mins ago.
+    <div class="col-7 align-items-center">
+      <div class="card text-center" >
+        <div class="card-body">
+          <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="userRowSelect($event)"></ng2-smart-table>
+        </div>
+        <div class="card-footer text-muted">
+          Last save was 2 mins ago.
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="col-2">
+      <h4>Advertising Goes here</h4>
+    </div>
+  </div>  
   `,
 })
 export class TradeTableEditorComponent {
@@ -26,12 +37,13 @@ export class TradeTableEditorComponent {
   settings = {
     pager: {
       display: true,
-      perPage: 12
+      perPage: 13
     },
     columns: {
       tradeType: {
         title: 'Trade Type',
         type: 'html',
+        width: '7%',
         editor: {
           type: 'list',
           config: {
@@ -44,28 +56,38 @@ export class TradeTableEditorComponent {
         },
       },
       transactionDate: {
+        width: '7%',
         title: 'Transaction Date',
-        type: 'string',
+        type: 'custom',
+        renderComponent: ButtonViewComponent,
+        onComponentInitFunction(instance) {
+          instance.save.subscribe(row => {
+            alert(`${row.transactionDate} saved!`)
+          });
+        }
       },
       buyAmount: {
+        width: '10%',
         title: 'Buy Amount',
         type: 'string',
       },
       buyCurrency: {
         width: '3%',
-        title: 'Currency',
+        title: 'Buy Currency',
         type: 'string',       
       },
       sellAmount: {
+        width: '10%',
         title: 'Sell Amount',
         type: 'string',
       },
       sellCurrency: {
         width: '3%',
-        title: 'Currency',
+        title: 'Sell Currency',
         type: 'string',
       },
       tradingFeeAmount: {
+        width: '8%',
         title: 'Trading Fee',
         type: 'string',
       },
@@ -76,8 +98,7 @@ export class TradeTableEditorComponent {
       },
 
     },
-  };
-
+  }
   constructor(protected service: TradeService) {
     this.source = new LocalDataSource();
     this.service.getData().then((data) => {
