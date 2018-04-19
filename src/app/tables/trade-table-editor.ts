@@ -35,6 +35,9 @@ export class TradeTableEditorComponent {
   source: LocalDataSource;
   
   settings = {
+    edit: {
+      saveButtonContent: 'Save'
+    },	
     pager: {
       display: true,
       perPage: 13
@@ -66,6 +69,7 @@ export class TradeTableEditorComponent {
           });
         }
       },
+      // TODO put this in a seperate component with amount and currency as a generic component, because all 3 share commanility
       buyAmount: {
         width: '10%',
         title: 'Buy Amount',
